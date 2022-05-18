@@ -1,0 +1,26 @@
+{
+  "name": "tsoa-project",
+  "version": "1.0.0",
+  "main": "dist/src/server.js",
+  "author": "<liorbashanx@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "concurrently \"nodemon\" \"nodemon -x tsoa spec-and-routes\"",
+    "build": "tsoa spec-and-routes && tsc",
+    "start": "npm run build && node dist/src/server.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "express": "^4.18.1",
+    "tsoa": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/body-parser": "^1.19.2",
+    "@types/express": "^4.17.13",
+    "@types/node": "^17.0.31",
+    "concurrently": "^7.1.0",
+    "nodemon": "^2.0.16",
+    "ts-node": "^10.7.0",
+    "typescript": "^4.6.4"
+  }
+}
