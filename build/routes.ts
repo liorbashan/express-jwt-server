@@ -9,12 +9,33 @@ import { LoginController } from './../src/controllers/loginController';
 import { expressAuthentication } from './../src/auth/authentication';
 // @ts-ignore - no great way to install types from subpackage
 const promiseAny = require('promise.any');
+import { iocContainer } from './../src/lib/tsyringeTsoaIocContainer';
+import { IocContainer, IocContainerFactory } from '@tsoa/runtime';
 import type { RequestHandler } from 'express';
 import * as express from 'express';
 
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
 const models: TsoaRoute.Models = {
+    "GeneralResponse": {
+        "dataType": "refObject",
+        "properties": {
+            "errorCode": {"dataType":"double","required":true},
+            "errorDescription": {"dataType":"string","required":true},
+            "data": {"dataType":"union","subSchemas":[{"dataType":"any"},{"dataType":"enum","enums":[null]}],"required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "LoginRequest": {
+        "dataType": "refObject",
+        "properties": {
+            "email": {"dataType":"string","required":true},
+            "password": {"dataType":"string","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 };
 const validationService = new ValidationService(models);
 
@@ -29,7 +50,7 @@ export function RegisterRoutes(app: express.Router) {
             ...(fetchMiddlewares<RequestHandler>(HomeController)),
             ...(fetchMiddlewares<RequestHandler>(HomeController.prototype.keepAlive)),
 
-            function HomeController_keepAlive(request: any, response: any, next: any) {
+            async function HomeController_keepAlive(request: any, response: any, next: any) {
             const args = {
             };
 
@@ -39,7 +60,12 @@ export function RegisterRoutes(app: express.Router) {
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
 
-                const controller = new HomeController();
+                const container: IocContainer = typeof iocContainer === 'function' ? (iocContainer as IocContainerFactory)(request) : iocContainer;
+
+                const controller: any = await container.get<HomeController>(HomeController);
+                if (typeof controller['setStatus'] === 'function') {
+                controller.setStatus(undefined);
+                }
 
 
               const promise = controller.keepAlive.apply(controller, validatedArgs as any);
@@ -54,7 +80,7 @@ export function RegisterRoutes(app: express.Router) {
             ...(fetchMiddlewares<RequestHandler>(HomeController)),
             ...(fetchMiddlewares<RequestHandler>(HomeController.prototype.secure)),
 
-            function HomeController_secure(request: any, response: any, next: any) {
+            async function HomeController_secure(request: any, response: any, next: any) {
             const args = {
             };
 
@@ -64,7 +90,12 @@ export function RegisterRoutes(app: express.Router) {
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
 
-                const controller = new HomeController();
+                const container: IocContainer = typeof iocContainer === 'function' ? (iocContainer as IocContainerFactory)(request) : iocContainer;
+
+                const controller: any = await container.get<HomeController>(HomeController);
+                if (typeof controller['setStatus'] === 'function') {
+                controller.setStatus(undefined);
+                }
 
 
               const promise = controller.secure.apply(controller, validatedArgs as any);
@@ -78,8 +109,9 @@ export function RegisterRoutes(app: express.Router) {
             ...(fetchMiddlewares<RequestHandler>(LoginController)),
             ...(fetchMiddlewares<RequestHandler>(LoginController.prototype.login)),
 
-            function LoginController_login(request: any, response: any, next: any) {
+            async function LoginController_login(request: any, response: any, next: any) {
             const args = {
+                    requestBody: {"in":"body","name":"requestBody","required":true,"ref":"LoginRequest"},
             };
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
@@ -88,7 +120,12 @@ export function RegisterRoutes(app: express.Router) {
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
 
-                const controller = new LoginController();
+                const container: IocContainer = typeof iocContainer === 'function' ? (iocContainer as IocContainerFactory)(request) : iocContainer;
+
+                const controller: any = await container.get<LoginController>(LoginController);
+                if (typeof controller['setStatus'] === 'function') {
+                controller.setStatus(undefined);
+                }
 
 
               const promise = controller.login.apply(controller, validatedArgs as any);
