@@ -11,7 +11,7 @@ export class AdAuthenticationService implements IAuthentication {
     private permissionGroups: string[] = Object.values(AuthGroup);
     public async authenticate(username: string, password: string): Promise<Nullable<User>> {
         const ldapHost = getOsEnv('LDAP_SERVER_HOST');
-        const baseDN = 'dc=888holdings,dc=corp';
+        const baseDN = getOsEnv('LDAP_BASE_DN');
         const config = { url: ldapHost, baseDN, username, password };
         const ad = new AD(config);
         let result: Nullable<User>;
