@@ -1,4 +1,5 @@
-import { Controller, Get, Route, Response, Post, Security } from 'tsoa';
+import { Controller, Get, Route, Response, Request, Post, Security } from 'tsoa';
+import * as express from 'express';
 
 @Route('/')
 export class HomeController extends Controller {
@@ -10,8 +11,9 @@ export class HomeController extends Controller {
     }
 
     @Post('secure')
-    @Security('jwt', ['admin'])
-    public secure(): any {
+    @Security('jwt', ['BannerAdminRoot'])
+    public secure(@Request() request: express.Request): any {
+        console.log(request);
         return Response;
     }
 }

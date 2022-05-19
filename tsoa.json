@@ -1,24 +1,24 @@
 {
-  "entryFile": "src/app.ts",
-  "noImplicitAdditionalProperties": "throw-on-extras",
-  "controllerPathGlobs": ["src/**/*Controller.ts"],
-  "spec": {
-    "securityDefinitions": {
-      "jwt": {
-        "type": "jwt",
-        "name": "jwt",
-        "scopes": {
-          "admin": "can update schema",
-          "editor": "can edit"
-        }
-      }
+    "entryFile": "src/app.ts",
+    "noImplicitAdditionalProperties": "throw-on-extras",
+    "controllerPathGlobs": ["src/**/*Controller.ts"],
+    "spec": {
+        "securityDefinitions": {
+            "jwt": {
+                "type": "jwt",
+                "name": "jwt",
+                "scopes": {
+                    "BannerAdminRoot": "can update schema",
+                    "ConfigurationManagerEditor": "can edit"
+                }
+            }
+        },
+        "outputDirectory": "dist",
+        "specVersion": 3
     },
-    "outputDirectory": "dist",
-    "specVersion": 3
-  },
-  "routes": {
-    "routesDir": "build",
-    "authenticationModule": "./src/auth/authentication.ts",
-    "iocModule": "src/lib/tsyringeTsoaIocContainer.ts"
-  }
+    "routes": {
+        "routesDir": "build",
+        "authenticationModule": "./src/auth/authentication.ts",
+        "iocModule": "src/lib/tsyringeTsoaIocContainer.ts"
+    }
 }
